@@ -1,0 +1,15 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+# Le blog lit déjà /vigilance.json : on le branche sur le serveur Vigibug.
+[[redirects]]
+  from = "/vigilance.json"
+  to = "/api/vigilance"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
