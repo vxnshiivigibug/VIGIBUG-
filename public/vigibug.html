@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Vigibug</title><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#0B1F66"><link rel="manifest" href="/vigibug.webmanifest"><link rel="apple-touch-icon" href="/icon-192.png"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Vigibug">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B1F66'/%3E%3Cpath d='M16 6l11 19H5z' fill='%23F0B800'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#EEF2FB;--card:#fff;--ink:#0B1F66;--mut:#4B5F9A;--line:#C9D3EF;--soft:#EEF2FB;
+--gn:#2E9B33;--yl:#F0B800;--or:#F07800;--rd:#D91C18;--vt:#5B21B6;--bk:#111;--no:#8A93B5}
+@media(prefers-color-scheme:dark){:root{--bg:#0E1230;--card:#181D45;--ink:#EEF1FF;--mut:#A9B4E6;--line:#2E356E;--soft:#222959;--vt:#8B5CF6;--bk:#000}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+main{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1,h2,h3,p{margin:0}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-size:1.7rem;letter-spacing:-.03em;font-weight:800}
+.tabs{display:flex;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px}
+.tabs button{flex:1;border:0;background:none;color:var(--mut);font:inherit;font-weight:700;padding:11px 8px;border-radius:11px;min-height:46px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 2px 10px rgba(11,31,102,.14)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:16px;box-shadow:0 14px 40px rgba(11,31,102,.12)}
+.ban{display:flex;align-items:center;gap:14px;border-radius:18px;padding:16px 18px;color:#fff;border:5px solid rgba(255,255,255,.35)}
+.ban svg{width:38px;height:38px;flex:none;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.ban b{display:block;letter-spacing:.05em;font-size:1.15rem;line-height:1.1}.ban span{font-weight:700}
+.gn{background:linear-gradient(135deg,#1F8A26,#4CC752)}.yl{background:linear-gradient(135deg,#D4A200,#FFD24D);color:#1A1400}
+.or{background:linear-gradient(135deg,#D45F00,#FF9A2E)}.rd{background:linear-gradient(135deg,#B01010,#FF4A42)}
+.vt{background:linear-gradient(135deg,#3B0764,#A78BFA)}.bk{background:linear-gradient(135deg,#000,#333)}.no{background:linear-gradient(135deg,#5A6488,#8A93B5)}
+.scale{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;list-style:none;margin:0;padding:0}
+.scale li{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:.7rem;font-weight:700;color:var(--mut)}
+.scale i{display:block;width:100%;height:10px;border-radius:99px;opacity:.35}
+.scale li.on{color:var(--ink)}.scale li.on i{opacity:1;transform:scaleY(1.5);box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--ink)}
+.days{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.day{border:1px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:4px;background:var(--soft)}
+.day small{color:var(--mut);font-weight:700}.day b{display:flex;align-items:center;gap:8px}
+.dot{width:14px;height:14px;border-radius:50%;flex:none}
+.adv{background:var(--soft);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.meta{color:var(--mut);font-size:.85rem}
+label{font-weight:700;display:flex;flex-direction:column;gap:6px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:11px 12px;width:100%}
+.lv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border:0;padding:0;margin:0}
+.lv legend{font-weight:700;margin-bottom:6px;padding:0}
+.lv label{flex-direction:row;align-items:center;gap:8px;border:2px solid var(--line);border-radius:12px;padding:10px;cursor:pointer;font-size:.92rem;min-height:46px}
+.lv input{width:auto;accent-color:var(--ink)}.lv label:has(input:checked){border-color:var(--ink);background:var(--soft)}
+.btn{font:inherit;font-weight:700;border-radius:99px;padding:13px 22px;min-height:48px;cursor:pointer;border:2px solid var(--ink);background:var(--ink);color:var(--bg)}
+.btn.ghost{background:none;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 140px}
+.hist{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.hist li{display:flex;gap:10px;align-items:center;font-size:.92rem}
+#msg{min-height:1.4em;font-weight:700}
+@media(prefers-reduced-motion:no-preference){.ban.or,.ban.rd,.ban.vt,.ban.bk{animation:p 2.4s ease-in-out infinite}@keyframes p{50%{filter:brightness(1.15)}}}
+</style></head><body><main>
+<header><h1>Vigibug</h1></header>
+<div class="tabs" role="tablist" aria-label="Sections"><button role="tab" id="t-pub" aria-selected="true" aria-controls="v-pub">Vigilance</button><button role="tab" id="t-adm" aria-selected="false" aria-controls="v-adm">Gestion</button></div>
+
+<section id="v-pub" role="tabpanel" aria-labelledby="t-pub" class="card"></section>
+<div id="alerts" class="card" style="gap:10px"><div class="row"><button class="btn" id="nb" type="button">Activer les alertes</button></div><p class="meta" id="nm"></p></div>
+<section id="v-adm" role="tabpanel" aria-labelledby="t-adm" hidden class="card">
+ <form id="f-lock" style="display:flex;flex-direction:column;gap:14px"><h2>Accès gestion</h2>
+  <label>Code admin<input id="pw" type="password" autocomplete="current-password" required></label>
+  <button class="btn" type="submit">Entrer</button><p id="lock-m" class="meta" role="alert"></p></form>
+ <form id="f-adm" hidden style="display:flex;flex-direction:column;gap:16px">
+  <fieldset class="lv" id="lv-now"></fieldset>
+  <label>Niveau demain<select id="tom"></select></label>
+  <label>Message pour les visiteurs<textarea id="note" rows="2" maxlength="220" placeholder="Ex. : le chat est en maintenance jusqu’à 18 h."></textarea></label>
+  <label>Début prévu (vide = tout de suite)<input id="from" type="datetime-local"></label>
+  <label>Retour à la normale prévu<input id="until" type="datetime-local"></label>
+  <div class="row"><button class="btn" type="submit">Publier</button><button class="btn ghost" type="button" id="lo">Verrouiller</button></div>
+  <p id="msg" role="status"></p>
+ </form>
+</section>
+</main>
+<script>
+var L=[["gn","Verte","green","Le site est disponible. Tu peux l’utiliser normalement."],["yl","Jaune","yellow","Un bug est connu ou en cours de correction. Tu peux continuer à utiliser le site."],["or","Orange","orange","Une panne touche une partie du site. Évite les actions importantes."],["rd","Rouge","red","Panne extrême : une grande partie du site peut ne pas fonctionner."],["vt","Violette","violet","Hors service : le site peut ne pas répondre. Reviens plus tard."],["bk","Noire","black","Hors service extrême : n’utilise pas le site tant que cette vigilance est active."]];
+var CODE={green:"gn",yellow:"yl",orange:"or",red:"rd",violet:"vt",black:"bk"},REMOTE=null,TK="vigibug-token";
+function $(i){return document.getElementById(i)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function nm(c){for(var i=0;i<6;i++)if(L[i][0]===c)return L[i]}
+function fr(i,o){return new Date(i).toLocaleString("fr-FR",o||{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})}
+function iso(v){return v?new Date(v).toISOString():""}
+function loc(i){var d=i?new Date(i):null;return d&&!isNaN(d)?new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,16):""}
+function st(){var j=REMOTE||{},n="gn";for(var c in CODE)if(j[c+"Active"])n=CODE[c];
+ return{now:n,tom:j.tomorrow||"",note:j.msg||"",from:j.from||"",until:j.until||"",history:(j.history||[]).map(function(h){return{l:CODE[h.l]||h.l,d:h.d}})}}
+function future(i){return i&&Date.parse(i)>Date.now()}
+function active(s){if(future(s.from)||(s.until&&Date.parse(s.until)<Date.now()))return"gn";return s.now}
+function view(){
+ var s=st(),c=active(s),n=nm(c),t=s.tom||c,tn=nm(t),pl=future(s.from)?nm(s.now):null;
+ var sc=L.map(function(x){return'<li class="'+(x[0]===c?"on":"")+'"><i class="'+x[0]+'"></i><span>'+x[1]+'</span></li>'}).join("");
+ $("v-pub").innerHTML='<div class="ban '+c+'" role="status"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L2.5 20h19L12 3z"/><path d="M12 10v5M12 17.6v.1"/></svg><div><b>VIGILANCE '+n[1].toUpperCase()+'</b><span>'+(c==="gn"?"Rien à signaler":esc(n[3]))+'</span></div></div>'
+ +'<ol class="scale" aria-label="Échelle des niveaux">'+sc+'</ol>'
+ +'<div class="days"><div class="day"><small>Aujourd’hui</small><b><span class="dot '+c+'"></span>'+n[1]+'</b></div><div class="day"><small>Demain</small><b><span class="dot '+t+'"></span>'+tn[1]+'</b></div></div>'
+ +'<div class="adv"><h2 style="font-size:1.1rem">Conseils</h2><p>'+esc(n[3])+'</p>'+(s.note?'<p><b>'+esc(s.note)+'</b></p>':'')
+ +(pl?'<p class="meta">Prévue : vigilance '+pl[1].toLowerCase()+' le '+esc(fr(s.from))+'.</p>':'')
+ +(s.until&&c!=="gn"?'<p class="meta">Retour estimé : '+esc(fr(s.until))+'</p>':'')+'</div>'
+ +(s.history.length?'<div><h3 style="font-size:1rem;margin-bottom:8px">Derniers changements</h3><ul class="hist">'+s.history.slice(0,5).map(function(h){return'<li><span class="dot '+h.l+'"></span><b>'+nm(h.l)[1]+'</b><span class="meta">'+esc(fr(h.d,{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}))+'</span></li>'}).join("")+'</ul></div>':'');
+ document.title=(c==="gn"?"":"⚠ ")+"Vigibug · "+n[1];
+}
+function load(){return fetch("/vigilance.json?t="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){REMOTE=j;view()}).catch(view)}
+function fill(){var s=st();
+ $("lv-now").innerHTML='<legend>Niveau</legend>'+L.map(function(x){return'<label><input type="radio" name="n" value="'+x[0]+'"'+(x[0]===s.now?" checked":"")+'><span class="dot '+x[0]+'"></span>'+x[1]+'</label>'}).join("");
+ $("tom").innerHTML='<option value="">Même niveau qu’aujourd’hui</option>'+L.map(function(x){return'<option value="'+x[0]+'"'+(x[0]===s.tom?" selected":"")+'>'+x[1]+'</option>'}).join("");
+ $("note").value=s.note;$("from").value=loc(s.from);$("until").value=loc(s.until)}
+function unlock(){$("f-lock").hidden=true;$("f-adm").hidden=false;fill()}
+function tab(a){$("t-pub").setAttribute("aria-selected",!a);$("t-adm").setAttribute("aria-selected",a);$("v-pub").hidden=a;$("alerts").hidden=a;$("v-adm").hidden=!a}
+$("t-pub").onclick=function(){tab(false)};$("t-adm").onclick=function(){tab(true)};
+function check(t){return fetch("/api/vigilance?check=1",{headers:{authorization:"Bearer "+t}}).then(function(r){return r.ok})}
+$("f-lock").onsubmit=function(e){e.preventDefault();var p=$("pw").value;
+ check(p).then(function(ok){if(ok){sessionStorage.setItem(TK,p);$("lock-m").textContent="";unlock()}else $("lock-m").textContent="Code incorrect."}).catch(function(){$("lock-m").textContent="Serveur injoignable."});$("pw").value=""};
+$("lo").onclick=function(){sessionStorage.removeItem(TK);$("f-adm").hidden=true;$("f-lock").hidden=false};
+$("f-adm").onsubmit=function(e){e.preventDefault();
+ var n=document.querySelector('input[name=n]:checked').value,t=$("tom").value,o={};
+ L.forEach(function(x){o[x[2]+"Active"]=x[0]===n;o[x[2]+"Title"]=x[1];o[x[2]+"Desc"]=x[3]});
+ o.msg=$("note").value.trim();o.detail="";o.tomorrow=t===n?"":t;o.from=iso($("from").value);o.until=iso($("until").value);o.updated=new Date().toISOString();
+ $("msg").textContent="Publication…";
+ fetch("/api/vigilance",{method:"POST",headers:{authorization:"Bearer "+sessionStorage.getItem(TK),"content-type":"application/json"},body:JSON.stringify(o)})
+ .then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(j){REMOTE=j;view();$("msg").textContent=o.from&&future(o.from)?"Planifié : le blog et les alertes passeront au niveau choisi à l’heure prévue (à 5 minutes près).":"Publié : le blog est à jour et les alertes sont parties."})
+ .catch(function(){$("msg").textContent="Échec de la publication. Vérifie le code admin et la connexion."})};
+/* ---- alertes push ---- */
+function b64(k){var s=(k+"=".repeat((4-k.length%4)%4)).replace(/-/g,"+").replace(/_/g,"/"),r=atob(s);return Uint8Array.from(r,function(c){return c.charCodeAt(0)})}
+function subscribe(){return navigator.serviceWorker.ready.then(function(reg){return fetch("/api/subscribe").then(function(r){return r.json()}).then(function(k){
+ if(!k.key)throw 0;return reg.pushManager.getSubscription().then(function(x){return x||reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64(k.key)})})})})
+ .then(function(sub){return fetch("/api/subscribe",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(sub)})})}
+function paintNb(){var b=$("nb"),m=$("nm");
+ if(!("Notification" in window)||!("PushManager" in window)){b.hidden=true;m.textContent="Les alertes ne sont pas disponibles ici. Sur iPhone, ajoute d’abord Vigibug à l’écran d’accueil (Partager, puis Sur l’écran d’accueil).";return}
+ var p=Notification.permission;b.hidden=p==="granted";
+ m.textContent=p==="granted"?"Alertes activées : tu es prévenu à chaque changement de niveau, même appli fermée.":p==="denied"?"Alertes bloquées : autorise-les dans les réglages de l’appareil.":"Reçois une alerte quand le niveau change."}
+$("nb").onclick=function(){Notification.requestPermission().then(function(p){if(p!=="granted")return;return subscribe()}).then(paintNb).catch(function(){$("nm").textContent="Activation impossible pour le moment. Réessaie plus tard."})};
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js").then(function(){if("Notification" in window&&Notification.permission==="granted")subscribe().catch(function(){})}).catch(function(){});
+paintNb();load();setInterval(load,60000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)load()});
+if(sessionStorage.getItem(TK))check(sessionStorage.getItem(TK)).then(function(ok){if(ok)load().then(unlock)}).catch(function(){});
+</script></body></html>
